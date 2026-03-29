@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+playwright
+beautifulsoup4
+lxml
+redis
+aiocache
+slowapi
+httpx
+python-dotenv
