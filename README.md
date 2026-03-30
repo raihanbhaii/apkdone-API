@@ -69,7 +69,7 @@ You must use Python 3.11 or higher to take advantage of the latest `asyncio` opt
 
 ~~~bash
 # 1. Clone the repository into your local or remote workspace
-git clone https://github.com/OfficialRageAI/apkdone-API.git
+git clone https://github.com/raihanbhaii/apkdone-API.git
 cd apkdone-API
 
 # 2. Establish a heavily isolated virtual environment
@@ -210,9 +210,9 @@ If something goes wrong, the API fails gracefully with informative JSON payloads
 
 ---
 
-## 🤝 8. The Official Contribution Protocol
+## 🤝 8. Contribution Protocol
 
-We maintain strict quality control over this repository. If you wish to contribute to the Official Rage AI infrastructure, you must follow this protocol:
+We maintain strict quality control over this repository. If you wish to contribute, please follow this protocol:
 
 1. **Fork the Repository:** Create an isolated copy of the codebase on your account.
 2. **Branch Strategy:** Create a semantic branch for your work (e.g., `feature/redis-caching` or `bugfix/search-pagination`).
@@ -230,6 +230,5 @@ This project is distributed under the **BSD 3-Clause License**. This explicitly 
 See the `LICENSE` file for the full, legally binding text.
 
 <div align="center">
-<p><b>Maintained by Official Rage AI</b></p>
 <p><i>High-Performance Systems & Scalable Architecture.</i></p>
 </div>
