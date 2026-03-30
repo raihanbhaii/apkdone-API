@@ -70,22 +70,12 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 # ── Core helpers ──────────────────────────────────────────────────────────────
 
 async def fetch(url: str) -> BeautifulSoup:
-    """Fetch via ScraperAPI (handles Cloudflare automatically)."""
     if not SCRAPER_API_KEY:
         raise RuntimeError("SCRAPER_API_KEY env variable is not set")
-
-    proxy_url = (
-        f"http://scraperapi:{SCRAPER_API_KEY}"
-        f"@proxy-server.scraperapi.com:8001"
-    )
-
-    async with httpx.AsyncClient(
-        proxies={"http://": proxy_url, "https://": proxy_url},
-        verify=False,          # ScraperAPI uses its own SSL
-        timeout=60,            # ScraperAPI can be slow on JS-heavy pages
-        follow_redirects=True,
-    ) as c:
-        r = await c.get(url)
+    api_url = "http://api.scraperapi.com"
+    params = {"api_key": SCRAPER_API_KEY, "url": url}
+    async with httpx.AsyncClient(timeout=60, follow_redirects=True) as c:
+        r = await c.get(api_url, params=params)
         r.raise_for_status()
         return BeautifulSoup(r.text, "lxml")
 
