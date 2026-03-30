@@ -1,10 +1,9 @@
 fastapi
 uvicorn[standard]
-playwright
+httpx
 beautifulsoup4
 lxml
-redis
+redis>=5.0.0
 aiocache
 slowapi
-httpx
 python-dotenv
