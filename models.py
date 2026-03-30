@@ -3,15 +3,9 @@ from typing import List, Optional
 
 class DownloadLink(BaseModel):
     name: str
-    original_url: str          # hidden
-    clean_url: Optional[str] = None   # public: /d/slug-1
+    original_url: str
+    clean_url: Optional[str] = None
     size: Optional[str] = None
-    direct_apk: bool = False
-
-class OldVersion(BaseModel):
-    version: str
-    date: Optional[str] = None
-    download_url: str
 
 class AppDetail(BaseModel):
     title: str
@@ -20,14 +14,10 @@ class AppDetail(BaseModel):
     logo: Optional[str] = None
     version: str
     size: Optional[str] = None
-    developer: Optional[str] = None
-    category: Optional[str] = None
-    requires_android: Optional[str] = None
     updated: Optional[str] = None
-    description: str
-    screenshots: List[str] = []
+    requires_android: Optional[str] = None
+    description: str = ""
     download_links: List[DownloadLink] = []
-    old_versions: List[OldVersion] = []
 
 class AppItem(BaseModel):
     title: str
