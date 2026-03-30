@@ -3,7 +3,6 @@ uvicorn[standard]
 httpx
 beautifulsoup4
 lxml
-redis>=5.0.0
-aiocache
+aiocache[redis]
 slowapi
 python-dotenv
