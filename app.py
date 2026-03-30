@@ -56,6 +56,9 @@ HEADERS = {
 
 download_cache: dict = {}
 
+import os
+SCRAPER_API_KEY = os.getenv("SCRAPER_API_KEY", "")
+
 # ── FastAPI setup ─────────────────────────────────────────────────────────────
 
 limiter = Limiter(key_func=get_remote_address)
@@ -67,7 +70,21 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 # ── Core helpers ──────────────────────────────────────────────────────────────
 
 async def fetch(url: str) -> BeautifulSoup:
-    async with httpx.AsyncClient(headers=HEADERS, timeout=30, follow_redirects=True) as c:
+    """Fetch via ScraperAPI (handles Cloudflare automatically)."""
+    if not SCRAPER_API_KEY:
+        raise RuntimeError("SCRAPER_API_KEY env variable is not set")
+
+    proxy_url = (
+        f"http://scraperapi:{SCRAPER_API_KEY}"
+        f"@proxy-server.scraperapi.com:8001"
+    )
+
+    async with httpx.AsyncClient(
+        proxies={"http://": proxy_url, "https://": proxy_url},
+        verify=False,          # ScraperAPI uses its own SSL
+        timeout=60,            # ScraperAPI can be slow on JS-heavy pages
+        follow_redirects=True,
+    ) as c:
         r = await c.get(url)
         r.raise_for_status()
         return BeautifulSoup(r.text, "lxml")
