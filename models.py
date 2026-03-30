@@ -5,7 +5,6 @@ class DownloadLink(BaseModel):
     name: str
     original_url: str
     clean_url: Optional[str] = None
-    size: Optional[str] = None
 
 class AppDetail(BaseModel):
     title: str
