@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: apkdone-scraper
+    runtime: docker
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: apkdone-redis
+          property: connectionString
+    plan: starter   # or higher for Playwright
+  - type: redis
+    name: apkdone-redis
+    plan: free
